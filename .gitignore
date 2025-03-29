@@ -1,0 +1,6 @@
+# sub-directories
+build/
+.vscode/
+
+# executable types
+*.exe
