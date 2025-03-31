@@ -1,6 +1,9 @@
-# sub-directories
+# directories
 build/
-.vscode/
+.vscode/*
 
-# executable types
+# executables
 *.exe
+
+# exceptions
+!.vscode/settings.json
