@@ -1,6 +1,6 @@
 # Prisma
 <p align="center">
-  <img alt="prisma logo .svg" width="25%" src="prisma-shatteredHierarchy-nogaps.svg" />
+  <img alt="prisma logo .svg" width="25%" src="assets/logos/prisma-shatteredHierarchy-nogaps.svg" />
 </p>
 
 ## About
