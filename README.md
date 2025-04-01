@@ -9,7 +9,7 @@ This project was started around the 28th of March 2025, and is hoping to one day
 
 >[!NOTE]
 > Prisma is just getting started.
-> If you have any feedback or input to give, feel free to do so anywhere, but at the moment preferably through [jas31415's Discord account](https://discord.com/users/230936829392715777).
+> If you have any feedback or suggestions to give, feel free to [submit an issue](https://github.com/jas31415/prisma/issues/new) about it.
 
 ## Plans
 Since this entire project is still a ball of uncertainty, this file will be used to list plans related to the engine.
@@ -21,6 +21,14 @@ It is not looking for success, but instead is looking for a learning experience.
 - [ ] **Interface:** Create an elegant user interface with which Prisma's components can be used by a developer.
 
 Wherever this goes, Prisma should be loud and proud about its connections to queer spaces.
+
+## For Developers
+Here are the instructions for building and compiling this project.
+Prisma uses the **g++ compiler** along with **Make**.
+If you are using VSCode, using the Makefile Tools plugin, or whatever tool you fancy for it.
+Use default configuration, "main" as build target, and "main" as launch target.
+>[!NOTE]
+> If these instructions are unclear or contain an error, please [submit an issue](https://github.com/jas31415/prisma/issues/new) detailing the issue and the relevant information.
 
 ## License
 Prisma is licensed under the MIT License:
