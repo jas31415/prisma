@@ -20,7 +20,7 @@ The other branches will be discontinued or archived, but never deleted.
 
 - [ ] **[SDL3](https://www.libsdl.org/):** $\color{gray}\texttt{branch}$
 - [ ] **[SFML](https://www.sfml-dev.org/):** $\color{gray}\texttt{branch}$
-- [ ] **[raylib](https://www.raylib.com/):** [branch]([https://github.com/](https://github.com/jas31415/prisma/tree/libcandidate-raylib))
+- [ ] **[raylib](https://www.raylib.com/):** [branch](https://github.com/jas31415/prisma/tree/libcandidate-raylib)
 - [ ] **MoreIdeasHere:** If you got any suggestions, [submit an issue](https://github.com/jas31415/prisma/issues/new) with any combination of libraries that you think Prisma should try out.
 
 Wherever this goes, Prisma should be loud and proud about its associations to queer spaces.
