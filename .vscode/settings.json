@@ -1,9 +1,0 @@
-{
-	"makefile.launchConfigurations": [
-		{
-			"cwd": "c:\\Users\\yourd\\source\\repos\\prisma",
-			"binaryPath": "c:\\Users\\yourd\\source\\repos\\prisma\\main",
-			"binaryArgs": []
-		}
-	]
-}

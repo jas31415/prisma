@@ -1,9 +1,6 @@
 # directories
 build/
-.vscode/*
+.vscode/
 
 # executables
 *.exe
-
-# exceptions
-!.vscode/settings.json
