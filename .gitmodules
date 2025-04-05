@@ -1,0 +1,9 @@
+[submodule "raylib"]
+	path = raylib
+	url = https://github.com/raysan5/raylib.git
+[submodule "vendor"]
+	path = vendor
+	url = https://github.com/raysan5/raylib.git
+[submodule "vendored/raylib"]
+	path = vendored/raylib
+	url = https://github.com/raysan5/raylib.git
