@@ -58,7 +58,7 @@ void Editor::Render() const
 	EndDrawing();
 }
 
-std::string Editor::s_PathToLogo{ "C:/Users/yourd/source/repos/prisma/assets/logos/prisma-shatteredHierarchy-nogaps.png" };
+std::string Editor::s_PathToLogo{ "../assets/logos/prisma-shatteredHierarchy-nogaps.png" };
 Texture2D Editor::s_LogoTexture{ };
 
 Editor& Editor::GetSingleton()
