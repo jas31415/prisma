@@ -7,6 +7,6 @@ PRIVATE
 	main.cpp
 	editor.cpp
 	settings.cpp
-	macros.cpp
+	theme.cpp
 	)
 target_link_libraries(${PROJECT_NAME} PRIVATE vendored)

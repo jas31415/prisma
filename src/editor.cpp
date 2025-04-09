@@ -4,26 +4,37 @@ editor.cpp is the manager class of the engine's various components
 
 */
 
-#include "macros.cpp"
+// raylib
 #include "raylib.h"
+
+// prisma
 #include "editor.h"
 #include "settings.h"
+#include "main.h"
+#include "theme.h"
 
 Editor::Editor()
-	: m_pSettings	{ nullptr }
-	, m_State		{ State::LOADING }
-	, m_Title 		{ "Prisma " + PRISMA_VERSION_STRING }
+	: c_VersionString	{ "1.0-libcandidate-raylib-b" }
+	, m_pSettings		{ new Settings() }
+	, m_State			{ State::LOADING }
+	, m_pAssignedTheme	{ nullptr }
 {
-	InitWindow(1, 1, m_Title.c_str());
+}
+
+Editor::~Editor()
+{
+	delete m_pSettings;
 }
 
 void Editor::Launch()
 {
+	const Image& windowIcon{ m_pAssignedTheme->GetWindowIcon() };
+
 	const Rectangle INITIAL_WINDOW_SPACE
 	{ 
-		(GetMonitorWidth(GetCurrentMonitor()) - s_LogoTexture.width * 2.5f) / 2.0f,
-		(GetMonitorHeight(GetCurrentMonitor()) - s_LogoTexture.height * 1.5f) / 2.0f,
-		s_LogoTexture.width * 2.5f,	s_LogoTexture.height * 1.5f
+		(GetMonitorWidth(GetCurrentMonitor()) - windowIcon.width * 2.5f) / 2.0f,
+		(GetMonitorHeight(GetCurrentMonitor()) - windowIcon.height * 1.5f) / 2.0f,
+		windowIcon.width * 2.5f,	windowIcon.height * 1.5f
 	};
 
 	ToggleBorderlessWindowed();
@@ -40,41 +51,41 @@ void Editor::Update()
 {
 	const float delta{ GetFrameTime() };
 
-
+	
 }
 
 void Editor::Render() const
 {
 	BeginDrawing();
 	{
-		ClearBackground(BLACK);
+		// !! FIX STATIC USAGE !!
+		static Texture2D windowIconTexture{ LoadTexture(m_pAssignedTheme->GetWindowIconPath().c_str()) };
+		ClearBackground(m_pAssignedTheme->GetBackgroundColor());
 		const Vector2 LOGO_POSITION
 		{
-			(GetScreenWidth() - s_LogoTexture.width) / 2.0f,
-			(GetScreenHeight() - s_LogoTexture.height) / 2.0f,
+			(GetScreenWidth() - windowIconTexture.width) / 2.0f,
+			(GetScreenHeight() - windowIconTexture.height) / 2.0f,
 		};
-		DrawTexture(s_LogoTexture, LOGO_POSITION.x, LOGO_POSITION.y, Color(RAYWHITE));
+		DrawTexture(windowIconTexture, LOGO_POSITION.x, LOGO_POSITION.y, RAYWHITE);
 	}
 	EndDrawing();
 }
 
-std::string Editor::s_PathToLogo{ "../assets/logos/prisma-shatteredHierarchy-nogaps.png" };
-Texture2D Editor::s_LogoTexture{ };
+void Editor::Terminate()
+{
+	// prisma
+	delete m_pSettings;
+}
 
 Editor& Editor::GetSingleton()
 {
 	static Editor singleton{ };
-#if EDITOR_SINGLETON_CREATED == false
-#undef EDITOR_SINGLETON_CREATED
-#define EDITOR_SINGLETON_CREATED true
-	s_LogoTexture = LoadTexture(s_PathToLogo.c_str());
-#endif
 	return singleton;
 }
 
-Editor::State Editor::GetState() const
+std::string Editor::GetVersionString() const
 {
-	return m_State;
+	return c_VersionString;
 }
 
 void Editor::SetState(Editor::State newState)
@@ -82,7 +93,22 @@ void Editor::SetState(Editor::State newState)
 	m_State = newState;
 }
 
-const std::string& Editor::GetTitle() const
+Editor::State Editor::GetState() const
 {
-	return m_Title;
+	return m_State;
+}
+
+Settings* Editor::GetSettings() const
+{
+	return m_pSettings;
+}
+
+void Editor::AssignTheme(Theme* theme)
+{
+	m_pAssignedTheme = theme;
+}
+
+Theme* Editor::GetAssignedTheme() const
+{
+	return m_pAssignedTheme;
 }

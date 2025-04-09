@@ -3,6 +3,7 @@
 #include <memory>
 
 class Settings;
+class Theme;
 
 class Editor final
 {
@@ -18,21 +19,23 @@ public:
 	void HandleInput();
 	void Update();
 	void Render() const;
+	void Terminate();
 
 	static Editor& GetSingleton();
-
-	State GetState() const;
+	
+	std::string GetVersionString() const;
 	void SetState(State newState);
-	const std::string& GetTitle() const;
+	State GetState() const;
+	Settings* GetSettings() const;
+	void AssignTheme(Theme* theme);
+	Theme* GetAssignedTheme() const;
 
 private:
+	const std::string c_VersionString;
 	Settings* m_pSettings;
+	Theme* m_pAssignedTheme;
 	State m_State;
-	const std::string m_Title;
-
-	static std::string s_PathToLogo;
-	static Texture2D s_LogoTexture;
 
 	explicit Editor();
-	~Editor() = default;
+	~Editor();
 };

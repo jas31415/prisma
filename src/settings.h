@@ -1,18 +1,25 @@
+#pragma once
+#include <string>
+
 class Settings final
 {
 public:
-	explicit Settings() = default;
+	explicit Settings();
 	Settings(const Settings& other) = default;
 	Settings& operator=(const Settings& other) = default;
 	Settings(Settings&& other) = default;
 	Settings& operator=(Settings&& other) = default;
 	~Settings() = default;
 
-	int GetFPS(bool getTarget) const;
+	void SetTitle(const std::string& newTitle);
+	std::string GetTitle() const;
+	void SetTargetFPS(int newTargetFPS);
+	int GetTargetFPS() const;
+	float GetFPS() const;
+	void SetVSync(bool enable);
 	bool IsVSyncEnabled() const;
-	void SetVSync(bool newTruth);
 
 private:
-	const int c_TargetFPS;
-	bool m_DoVSync;
+	std::string m_Title;
+	int m_TargetFPS;
 };
