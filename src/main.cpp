@@ -1,8 +1,7 @@
 /*
 
-main.cpp is the entry point for Prisma
-it configured raylib
-from here, the editor does five things:
+Main is the entry point for Prisma
+from here, the editor does its five key things:
 	launch,
 	handle input,
 	update,
@@ -27,7 +26,7 @@ Main::Main()
 {
 	m_Themes.insert(
 		{"editor", new Theme(
-			"../assets/logos/prisma-shatteredHierarchy.png",
+			"../assets/logos/prisma-shatteredHierarchy-noGaps.png",
 			ColorFromHSV(245.0f, 0.5f, 0.15f)
 		)}
 	);
@@ -39,7 +38,6 @@ Main::~Main()
 	{
 		delete itr->second;
 	}
-	std::cout << m_Themes.at("editor") << std::endl;
 }
 
 Main& Main::GetSingleton()

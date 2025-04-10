@@ -8,5 +8,6 @@ PRIVATE
 	editor.cpp
 	settings.cpp
 	theme.cpp
+	renderitem.cpp
 	)
 target_link_libraries(${PROJECT_NAME} PRIVATE vendored)

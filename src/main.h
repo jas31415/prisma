@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
+#define nameof(name) std::string(#name)
 
 class Editor;
 class Theme;

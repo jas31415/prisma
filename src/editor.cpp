@@ -1,42 +1,50 @@
 /*
 
-editor.cpp is the manager class of the engine's various components
+Editor is the manager class of the engine's various game development components
 
 */
+
+// c++
+#include <string>
 
 // raylib
 #include "raylib.h"
 
 // prisma
+#include "main.h"
 #include "editor.h"
 #include "settings.h"
-#include "main.h"
 #include "theme.h"
+#include "renderitem.h"
 
 Editor::Editor()
-	: c_VersionString	{ "1.0-libcandidate-raylib-b" }
+	: c_VersionString	{ "1.0-libcandidate-raylib-c" }
 	, m_pSettings		{ new Settings() }
 	, m_State			{ State::LOADING }
 	, m_pAssignedTheme	{ nullptr }
+	, m_pRenderItem		{ }
 {
 }
 
 Editor::~Editor()
 {
 	delete m_pSettings;
+	delete m_pRenderItem;
 }
 
 void Editor::Launch()
 {
+	m_pRenderItem = new RenderItem(LoadTextureFromImage(m_pAssignedTheme->GetWindowIcon()));
 	const Image& windowIcon{ m_pAssignedTheme->GetWindowIcon() };
-
+	SetWindowIcon(windowIcon);
+	
 	const Rectangle INITIAL_WINDOW_SPACE
 	{ 
 		(GetMonitorWidth(GetCurrentMonitor()) - windowIcon.width * 2.5f) / 2.0f,
 		(GetMonitorHeight(GetCurrentMonitor()) - windowIcon.height * 1.5f) / 2.0f,
 		windowIcon.width * 2.5f,	windowIcon.height * 1.5f
 	};
-
+	
 	ToggleBorderlessWindowed();
 	SetWindowSize(INITIAL_WINDOW_SPACE.width, INITIAL_WINDOW_SPACE.height);
 	SetWindowPosition(INITIAL_WINDOW_SPACE.x, INITIAL_WINDOW_SPACE.y);
@@ -56,25 +64,23 @@ void Editor::Update()
 
 void Editor::Render() const
 {
+	const Texture2D& logo{ m_pRenderItem->GetRaylibTexture() };
 	BeginDrawing();
 	{
-		// !! FIX STATIC USAGE !!
-		static Texture2D windowIconTexture{ LoadTexture(m_pAssignedTheme->GetWindowIconPath().c_str()) };
 		ClearBackground(m_pAssignedTheme->GetBackgroundColor());
 		const Vector2 LOGO_POSITION
 		{
-			(GetScreenWidth() - windowIconTexture.width) / 2.0f,
-			(GetScreenHeight() - windowIconTexture.height) / 2.0f,
+			(GetScreenWidth() - logo.width) / 2.0f,
+			(GetScreenHeight() - logo.height) / 2.0f,
 		};
-		DrawTexture(windowIconTexture, LOGO_POSITION.x, LOGO_POSITION.y, RAYWHITE);
+		DrawTexture(logo, LOGO_POSITION.x, LOGO_POSITION.y, RAYWHITE);
 	}
 	EndDrawing();
 }
 
 void Editor::Terminate()
 {
-	// prisma
-	delete m_pSettings;
+	
 }
 
 Editor& Editor::GetSingleton()

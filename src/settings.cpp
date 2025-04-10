@@ -1,6 +1,6 @@
 /*
 
-settings.cpp is where the engine's configurations are managed
+Settings is where the engine's configurations are managed
 
 [9:48 8-4-25] (jas31415)
 	I did not singleton this because I expect to reuse it in the future for
@@ -12,12 +12,6 @@ settings.cpp is where the engine's configurations are managed
 
 // prisma
 #include "settings.h"
-
-Settings::Settings()
-	: m_Title 		{ "" }
-	, m_TargetFPS	{ 60 }
-{
-}
 
 // Sets the title of the window
 // This function exists because raylib offers no way to acquire the window's title

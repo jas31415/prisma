@@ -1,9 +1,8 @@
 #pragma once
-#include <string>
-#include <memory>
 
 class Settings;
 class Theme;
+class RenderItem;
 
 class Editor final
 {
@@ -30,11 +29,14 @@ public:
 	void AssignTheme(Theme* theme);
 	Theme* GetAssignedTheme() const;
 
+
 private:
 	const std::string c_VersionString;
 	Settings* m_pSettings;
 	Theme* m_pAssignedTheme;
 	State m_State;
+	
+	RenderItem* m_pRenderItem;
 
 	explicit Editor();
 	~Editor();

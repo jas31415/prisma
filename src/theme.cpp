@@ -1,6 +1,6 @@
 /*
 
-theme.cpp is the class that contains all UI-related variables for a project
+Theme is the class that contains all UI-related variables for a project
 these also apply to the editor
 
 [15:08 8-4-25] (jas31415)
@@ -19,7 +19,8 @@ Theme::Theme(
 	const std::string& iconPath,
 	const Color& backgroundColor
 )
-	: m_WindowIconPath{ iconPath }
+	: m_WindowIcon{ LoadImage(iconPath.c_str()) }
+	, m_WindowIconPath{ iconPath }
 	, m_BackgroundColor{ backgroundColor }
 {
 }
@@ -27,10 +28,12 @@ Theme::Theme(
 // Adjusts both the window icon path stored by Prisma and the window icon path itself
 // This function exists because raylib doesn't provide a way to access the window icon once it is set
 // If you want to use raylib's version of this function, prefix the call with RAYLIB_H::
-void Theme::SetWindowIcon(const std::string& windowIconPath)
+void Theme::SetWindowIcon(const std::string& newIconPath)
 {
-	m_WindowIconPath = windowIconPath;
-	RAYLIB_H::SetWindowIcon(LoadImage(windowIconPath.c_str()));
+	m_WindowIconPath = newIconPath;
+	UnloadImage(m_WindowIcon);
+	m_WindowIcon = LoadImage(newIconPath.c_str());
+	RAYLIB_H::SetWindowIcon(m_WindowIcon);
 }
 
 std::string Theme::GetWindowIconPath() const
@@ -40,9 +43,7 @@ std::string Theme::GetWindowIconPath() const
 
 Image Theme::GetWindowIcon() const
 {
-	// !! FIX STATIC USAGE !!
-	static Image icon{ LoadImage(m_WindowIconPath.c_str()) };
-	return icon;
+	return m_WindowIcon;
 }
 
 void Theme::SetBackgroundColor(const Color& newColor)

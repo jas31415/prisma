@@ -4,7 +4,7 @@
 class Settings final
 {
 public:
-	explicit Settings();
+	explicit Settings() = default;
 	Settings(const Settings& other) = default;
 	Settings& operator=(const Settings& other) = default;
 	Settings(Settings&& other) = default;
