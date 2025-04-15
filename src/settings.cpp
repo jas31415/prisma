@@ -1,10 +1,7 @@
 /*
 
-Settings is where the engine's configurations are managed
+Settings is where a project's configurations are managed
 
-[9:48 8-4-25] (jas31415)
-	I did not singleton this because I expect to reuse it in the future for
-	some kind of project-file class
 */
 
 // raylib

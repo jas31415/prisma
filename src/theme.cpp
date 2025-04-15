@@ -1,7 +1,6 @@
 /*
 
-Theme is the class that contains all UI-related variables for a project
-these also apply to the editor
+Theme is the class that contains all GUI-related variables for a project
 
 [15:08 8-4-25] (jas31415)
 	at some point i want to try and make the editor a project within this code-base itself
@@ -19,10 +18,16 @@ Theme::Theme(
 	const std::string& iconPath,
 	const Color& backgroundColor
 )
-	: m_WindowIcon{ LoadImage(iconPath.c_str()) }
+	: m_pWindowIcon{ nullptr }
 	, m_WindowIconPath{ iconPath }
 	, m_BackgroundColor{ backgroundColor }
 {
+	SetWindowIcon(iconPath);
+}
+
+Theme::~Theme()
+{
+	UnloadImage(*m_pWindowIcon);
 }
 
 // Adjusts both the window icon path stored by Prisma and the window icon path itself
@@ -31,9 +36,12 @@ Theme::Theme(
 void Theme::SetWindowIcon(const std::string& newIconPath)
 {
 	m_WindowIconPath = newIconPath;
-	UnloadImage(m_WindowIcon);
-	m_WindowIcon = LoadImage(newIconPath.c_str());
-	RAYLIB_H::SetWindowIcon(m_WindowIcon);
+	if (m_pWindowIcon != nullptr)
+	{
+		UnloadImage(*m_pWindowIcon);
+	}
+	m_pWindowIcon = new Image{ LoadImage(newIconPath.c_str()) };
+	RAYLIB_H::SetWindowIcon(*m_pWindowIcon);
 }
 
 std::string Theme::GetWindowIconPath() const
@@ -41,9 +49,9 @@ std::string Theme::GetWindowIconPath() const
 	return m_WindowIconPath;
 }
 
-Image Theme::GetWindowIcon() const
+Image* Theme::GetWindowIcon() const
 {
-	return m_WindowIcon;
+	return m_pWindowIcon;
 }
 
 void Theme::SetBackgroundColor(const Color& newColor)

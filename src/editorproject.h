@@ -4,23 +4,24 @@ class Settings;
 class Theme;
 class RenderItem;
 
-class Editor final
+class EditorProject final
 {
 public:
 	enum class State { LOADING, INTERFACE };
 
-	Editor(const Editor& other) = delete;
-	Editor& operator=(const Editor& other) = delete;
-	Editor(Editor&& other) = delete;
-	Editor& operator=(Editor&& other) = delete;
+	EditorProject(const EditorProject& other) = delete;
+	EditorProject& operator=(const EditorProject& other) = delete;
+	EditorProject(EditorProject&& other) = delete;
+	EditorProject& operator=(EditorProject&& other) = delete;
 
 	void Launch();
 	void HandleInput();
 	void Update();
 	void Render() const;
 	void Terminate();
+	bool ShouldTerminate() const;
 
-	static Editor& GetSingleton();
+	static EditorProject& GetSingleton();
 	
 	std::string GetVersionString() const;
 	void SetState(State newState);
@@ -29,15 +30,15 @@ public:
 	void AssignTheme(Theme* theme);
 	Theme* GetAssignedTheme() const;
 
-
 private:
 	const std::string c_VersionString;
 	Settings* m_pSettings;
 	Theme* m_pAssignedTheme;
 	State m_State;
+	bool m_ShouldTerminate;
 	
 	RenderItem* m_pRenderItem;
 
-	explicit Editor();
-	~Editor();
+	explicit EditorProject();
+	~EditorProject();
 };

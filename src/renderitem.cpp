@@ -21,10 +21,16 @@ RenderItem::~RenderItem()
 	UnloadTexture(c_RaylibTexture);
 }
 
-Texture2D RenderItem::GetRaylibTexture() const
+void RenderItem::Render() const
 {
-	return c_RaylibTexture;
+	DrawTexture(c_RaylibTexture, m_Position.x, m_Position.y, WHITE);
 }
+
+// [15:14 14-4-25] (jas31415) Until this proves neccesary, i will leave it out
+// Texture2D RenderItem::GetRaylibTexture() const
+// {
+// 	return c_RaylibTexture;
+// }
 
 void RenderItem::SetPosition(const Vector2& newPosition)
 {

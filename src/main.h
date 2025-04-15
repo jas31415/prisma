@@ -3,7 +3,7 @@
 #include <map>
 #define nameof(name) std::string(#name)
 
-class Editor;
+class EditorProject;
 class Theme;
 
 class Main final

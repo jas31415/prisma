@@ -5,7 +5,7 @@ add_executable(${PROJECT_NAME})
 target_sources(${PROJECT_NAME}
 PRIVATE
 	main.cpp
-	editor.cpp
+	editorproject.cpp
 	settings.cpp
 	theme.cpp
 	renderitem.cpp

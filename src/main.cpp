@@ -12,13 +12,15 @@ main function is defined at the bottom
 
 */
 
-// libraries
+// c++
 #include <iostream>
+
+// raylib
 #include "raylib.h"
 
 // prisma
 #include "main.h"
-#include "editor.h"
+#include "editorproject.h"
 #include "settings.h"
 #include "theme.h"
 
@@ -57,22 +59,20 @@ int main()
 
 	Main& main{ Main::GetSingleton() };
 
-	Editor& editor{ Editor::GetSingleton() };
-	editor.AssignTheme(main.GetTheme("editor"));
+	EditorProject& project{ EditorProject::GetSingleton() };
+	project.AssignTheme(main.GetTheme("editor"));
 
-	Settings& editorSettings{ *editor.GetSettings() };
-	editorSettings.SetTitle("Prisma " + editor.GetVersionString());
+	Settings& projectSettings{ *project.GetSettings() };
+	projectSettings.SetTitle("Prisma " + project.GetVersionString());
 	
-	editor.Launch();
+	project.Launch();
 
-	while (!WindowShouldClose())
+	while (!project.ShouldTerminate())
 	{
-		editor.HandleInput();
-		editor.Update();
-		editor.Render();
+		project.HandleInput();
+		project.Update();
+		project.Render();
 	}
-
-	editor.Terminate();
 
 	CloseWindow();
 
